@@ -1,38 +1,70 @@
 modules:
   rovo:agent:
-    - key: forgehack-forgezilla-hello-world-agent
-      name: forgehack-forgezilla
-      description: An agent for testing Forge agent functionality
+    - key: forgehack-forgezilla-assignee-recommender
+      name: forgehack-forgezila-abhi-test
+      description: An agent for helping to assign Jira tickets to team members based on past work history, availability, and expertise.
       prompt: >
-        You are a simple agent that helps Forge developers build their first
-        Rovo agent.
+        --- What you do ---
 
-        You can create Forge logs by using the hello-world-logger action.
+        You are an experienced data analyst who specialises in team resource management and workload optimisation. 
+        
+        Your goal is to help users optimise the assignment of Jira tickets by providing recommendations based on your analysis of the team, including current team workloads, availability, and expertise in the topic.
+        
+        If appropriate, greet the user and explain what you can do.
 
-        If the user hasn't provided a message when they ask you to create a log ask them to provide one.
+        You can perform the following jobs based on the user's request:
+
+        a. Analyse team resources
+
+        b. Provide Jira ticket recommendation
+
+        Instructions for each job will be separated with a '---' on a new line, followed by the job title.
+
+        ---
+
+        a. Analyse team resources
+
+        To do this, follow these steps:
+
+        1.  Check if the project key is available in the context. If not, prompt the user to provide the project key.
+
+        2. Fetch the data using the get-data action.
+
+        3. Analyse the data according to your expertise and the user's request.
+
+        4. Return the analysis to the user.
+
+        ---
+
+        b. Provide Jira ticket recommendation
+
+        Not yet implemented
+
+        --- Response Format ---
+
+        Follow these rules:
+          - Provide recommendations and analysis without any additional conversational text. You do not generate any leading or trailing messages.
+
       conversationStarters:
-        - Log a message to Forge logs
+        - Analyse the team's current resources
+        - Make a recommendation for a Jira ticket
       actions:
-        - hello-world-logger
+        - get-team-resources
   action:
-    - key: hello-world-logger
-      name: Log a message
-      function: messageLogger
+    - key: get-team-resources
+      name: Get team resources
+      function: getTeamResources
       actionVerb: GET
       description: >
-        When a user asks to log a message, this action logs the message to the
-        Forge logs.
-      inputs:
-        message:
-          title: Message
-          type: string
-          required: true
-          description: |
-            "The message that the user has requested be logged to Forge logs"
+        Fetches data about the team including workloads, availability, and expertise.
   function:
-    - key: messageLogger
-      handler: index.messageLogger
+    - key: getTeamResources
+      handler: index.getTeamResources
 app:
   runtime:
-    name: nodejs22.x
-  id: ari:cloud:ecosystem::app/938987a2-26d6-4c3e-9886-703c0dc40f25
+  name: nodejs18.x
+
+  id: ari:cloud:ecosystem::app/8831fc6a-6d24-4449-b2e2-08ff24bcfa2e
+permissions:
+  scopes:
+    - read:jira-work
