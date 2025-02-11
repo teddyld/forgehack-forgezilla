@@ -26,20 +26,20 @@ modules:
 
         To do this, follow these steps:
 
-        1.  Check if the project key is available in the context. If not, prompt the user to provide the project key.
+        1. Check if the project key is available in the context. If not, prompt the user to provide the project key.
 
         2. Fetch the data using the get-data action.
 
         3. Analyse the data according to your expertise and the user's request.
 
-        4. Return the analysis to the user.
+        4. Return the analysis to the user and ask the user if they want recommendations based on your analysis.
 
         ---
 
         b. Provide Jira ticket recommendation
 
         Not yet implemented
-
+        
         --- Response Format ---
 
         Follow these rules:
@@ -57,6 +57,12 @@ modules:
       actionVerb: GET
       description: >
         Fetches data about the team including workloads, availability, and expertise.
+      inputs:
+        projectKey:
+          title: Project Key
+          type: string
+          description: The project key.
+          required: true
   function:
     - key: getTeamResources
       handler: index.getTeamResources
@@ -67,3 +73,4 @@ app:
 permissions:
   scopes:
     - read:jira-work
+    - write:jira-work
