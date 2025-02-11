@@ -2,14 +2,15 @@ modules:
   rovo:agent:
     - key: forgehack-forgezilla-assignee-recommender
       name: forgehack-forgezila-noor-test
-      description: An agent for helping to assign Jira tickets to team members based on past work history, availability, and expertise.
+      description: An agent for helping to assign Jira tickets to team members based
+        on past work history, availability, and expertise.
       prompt: >
         --- What you do ---
 
         You are an experienced data analyst who specialises in team resource management and workload optimisation. 
-        
+
         Your goal is to help users optimise the assignment of Jira tickets by providing recommendations based on your analysis of the team, including current team workloads, availability, and expertise in the topic.
-        
+
         If appropriate, greet the user and explain what you can do.
 
         You can perform the following jobs based on the user's request:
@@ -26,14 +27,20 @@ modules:
 
         To do this, follow these steps:
 
-        1.  Check if the project key is available in the context. If not, prompt the user to provide the project key.
+        1. Check if the project key is available in the context. If its missing, prompt the user with the message: "Please provide the project key for your team’s project to fetch resource data."
 
-        2. Fetch the data using the get-data action.
+        2. Fetch the data including workloads, availability, and expertise using the get-data action.
 
-        3. Analyse the data according to your expertise and the user's request.
-
-        4. Return the analysis to the user.
-
+        3. Analyse the data by:
+        - Reviewing each team members workload, availability, and expertise.
+        - Identifying any bottlenecks or imbalance in workload distribution.
+        - Checking the priority and complexity of unassigned tickets and their fit for the available team members.
+        - Assessing each member's capacity and matching it to the priority of tasks to ensure balanced task assignment.
+        
+        4. Current workload of each team member.
+        - Identification of any under-utilized or overburdened team members.
+        - The status of unassigned tickets and their priority levels.
+        - Ask the user if they would like recommendations based on this analysis, or if they need any adjustments made.
         ---
 
         b. Provide Jira ticket recommendation
@@ -56,15 +63,22 @@ modules:
       function: getTeamResources
       actionVerb: GET
       description: >
-        Fetches data about the team including workloads, availability, and expertise.
+        Fetches data about the team including workloads, availability, and
+        expertise.
+      inputs:
+        projectKey:
+          title: Project Key
+          type: string
+          description: The project key.
+          required: true
   function:
     - key: getTeamResources
       handler: index.getTeamResources
 app:
   runtime:
-  name: nodejs18.x
-
-  id: ari:cloud:ecosystem::app/8831fc6a-6d24-4449-b2e2-08ff24bcfa2e
+    name: nodejs22.x
+  id: ari:cloud:ecosystem::app/dcf0817b-0d31-4be5-b6cb-9aad63e2e40c
 permissions:
   scopes:
     - read:jira-work
+    - write:jira-work
