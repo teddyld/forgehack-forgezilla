@@ -1,0 +1,123 @@
+[
+    {
+      "Issue Key":"FGZ-2",
+      "Title":"Ideate the functionality of our Rovo Agent",
+      "Type":"Feature",
+      "Assignee":"Alexia Toole",
+      "Status":"Done",
+      "Priority":"High",
+      "Skills":"N\/a",
+      "Start Date":"11 Feb 2025, 13:00",
+      "End Date":"11 Feb 2025, 17:00"
+    },
+    {
+      "Issue Key":"FGZ-3",
+      "Title":"Fix login authentication bug",
+      "Type":"Bug",
+      "Assignee":"Vincent Pham",
+      "Status":"In Progess",
+      "Priority":"High",
+      "Skills":"Javascript, OAuth",
+      "Start Date":"11 Feb 2025, 3:00",
+      "End Date":"11 Feb 2025, 8:30"
+    },
+    {
+      "Issue Key":"FGZ-4",
+      "Title":"Implement new reporting dashboard",
+      "Type":"Feature",
+      "Assignee":"Vincent Pham",
+      "Status":"In Progress",
+      "Priority":"Medium",
+      "Skills":"React, GraphQL",
+      "Start Date":"11 Feb 2025, 2:00",
+      "End Date":"11 Feb 2025, 14:00"
+    },
+    {
+      "Issue Key":"FGZ-5",
+      "Title":"Optimize database queries for analytics",
+      "Type":"Feature",
+      "Assignee":"Noor Babar",
+      "Status":"Done",
+      "Priority":"Low",
+      "Skills":"SQL, PostgreSQL",
+      "Start Date":"11 Feb 2025, 1:00",
+      "End Date":"11 Feb 2025, 9:00"
+    },
+    {
+      "Issue Key":"FGZ-6",
+      "Title":"API security vulnerability patch",
+      "Type":"Bug",
+      "Assignee":"Noor Babar",
+      "Status":"Done",
+      "Priority":"Highest",
+      "Skills":"Node.js, Security",
+      "Start Date":"11 Feb 2025, 5:00",
+      "End Date":"11 Feb 2025, 11:00"
+    },
+    {
+      "Issue Key":"FGZ-7",
+      "Title":"Redesign user profile page",
+      "Type":"Feature",
+      "Assignee":"Unassigned",
+      "Status":"Low",
+      "Priority":"Low",
+      "Skills":"React, UI\/UX",
+      "Start Date":"11 Feb 2025, 2:00",
+      "End Date":"11 Feb 2025, 10:00"
+    },
+    {
+      "Issue Key":"FGZ-8",
+      "Title":"Fix search functionality in app",
+      "Type":"Bug",
+      "Assignee":"Vincent Pham",
+      "Status":"To Do",
+      "Priority":"High",
+      "Skills":"Javascript, ElasticSearch",
+      "Start Date":"11 Feb 2025, 13:00",
+      "End Date":"11 Feb 2025, 15:00"
+    },
+    {
+      "Issue Key":"FGZ-9",
+      "Title":"Upgrade backend services to Node.js 18",
+      "Type":"Feature",
+      "Assignee":"Noor Babar",
+      "Status":"In Progress",
+      "Priority":"Medium",
+      "Skills":"Node.js, Docker",
+      "Start Date":"11 Feb 2025, 0:00",
+      "End Date":"11 Feb 2025, 9:00"
+    },
+    {
+      "Issue Key":"FGZ-10",
+      "Title":"Add dark mode support",
+      "Type":"Feature",
+      "Assignee":"Abhishek Deshpande",
+      "Status":"To Do",
+      "Priority":"Lowest",
+      "Skills":"CSS, React",
+      "Start Date":"11 Feb 2025, 4:00",
+      "End Date":"11 Feb 2025, 8:00"
+    },
+    {
+      "Issue Key":"FGZ-11",
+      "Title":"Migrate authentication to Auth0",
+      "Type":"Feature",
+      "Assignee":"Vincent Pham",
+      "Status":"To Do",
+      "Priority":"Highest",
+      "Skills":"Auth0, OAuth, Node.js",
+      "Start Date":"11 Feb 2025, 2:00",
+      "End Date":"11 Feb 2025, 12:00"
+    },
+    {
+      "Issue Key":"FGZ-12",
+      "Title":"Improve mobile responsiveness",
+      "Type":"Feature",
+      "Assignee":"Unassigned",
+      "Status":"To Do",
+      "Priority":"Low",
+      "Skills":"Css, Media Queries",
+      "Start Date":"11 Feb 2025, 8:00",
+      "End Date":"11 Feb 2025, 13:00"
+    }
+  ]
