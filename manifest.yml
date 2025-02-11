@@ -17,7 +17,7 @@ modules:
         Give the users different ideas for how they can use your features.
           - Chat to it to quickly get an overview of the team's backlog, and resources.
           - Ask to provide recommendation on Jira issues using your analysis capabilities.
-          - Use it to send notifications to team members and assign tasks.
+          - Use it to send notifications to team members by commenting on issues and assign tasks.
 
         You can perform the following jobs based on the user's request:
 
@@ -117,9 +117,11 @@ modules:
 
         To do this, follow these steps:
 
-        1. Use the 'update-assignee' action provided the Jira issue key and the assignee name.
+        1. Obtain the issue key and assignee name from the context. If this information is not available, prompt the user to provide this information.
 
-        2. Return a confirmation message that the assignee has been updated if and only if the 'update-assignee' action was successful. If the update was not successful, explain in detail why you failed to update it.
+        2. Fetch the 'update-assignee' action using the provided Jira issue key and the assignee name.
+
+        3. Return a confirmation message that the assignee has been updated if and only if the 'update-assignee' action was successful. If the update was not successful, explain in detail why you failed to update it.
 
         ---
 
@@ -127,9 +129,11 @@ modules:
 
         To do this, follow these steps:
 
-        1. Use the 'notify-comment' action to post a comment on an issue
+        1. Obtain the issue id or key and comment from the context. If this information is not available, prompt the user to provide this information.
 
-        2. Return a confirmation message that the comment has been posted if the action was successful. If the comment was not posted, explain in detail why you failed.
+        2. Fetch the 'create-comment' action to create a comment on an issue using the provided issue id or key and the comment content. 
+
+        3. Return a confirmation message that the comment has been posted if the action was successful. If the comment was not posted, explain in detail why you failed.
 
         --- Response Format ---
 
@@ -143,7 +147,7 @@ modules:
       actions:
         - get-team-resources
         - update-assignee
-        - notify-comment
+        - create-comment
   action:
     - key: get-team-resources
       name: Get team resources
@@ -160,12 +164,12 @@ modules:
     - key: update-assignee
       name: Update JIRA Assignee
       function: updateJiraAssignee
-      actionVerb: UPDATE
+      actionVerb: GET
       description: >
-        Updates the assignee of a Jira ticket on a user's request
+        Updates the assignee of a Jira issue on a user's request
       inputs:
         issueKey:
-          title: Jira Ticket Key
+          title: Jira Issue Key
           type: string
           description: The key of the Jira issue to update.
           required: true
@@ -174,12 +178,12 @@ modules:
           type: string
           description: The name of the new assignee.
           required: true
-    - key: notify-comment
-      name: Notifying users with comment
-      function: notifyComment
-      actionVerb: UPDATE
+    - key: create-comment
+      name: Create a comment
+      function: createComment
+      actionVerb: GET
       description: >
-        Notifies tagged users of an issue with a comment
+        Creates a comment on an issue
       inputs:
         issueIdOrKey:
           title: Issue ID or Key
@@ -196,8 +200,8 @@ modules:
       handler: index.getTeamResources
     - key: updateJiraAssignee
       handler: index.updateJiraAssignee
-    - key: notifyComment
-      handler: index.notifyComment
+    - key: createComment
+      handler: index.createComment
 app:
   runtime:
     name: nodejs22.x
@@ -207,4 +211,3 @@ permissions:
     - read:jira-work
     - write:jira-work
     - read:jira-user
-    - manage:jira-configuration
