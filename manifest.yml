@@ -24,23 +24,30 @@ modules:
         ---
 
         a. Analyse team resources
-
-        To do this, follow these steps:
-
-        1. Check if the project key is available in the context. If its missing, prompt the user with the message: "Please provide the project key for your team’s project to fetch resource data."
-
-        2. Fetch the data including workloads, availability, and expertise using the get-data action.
-
-        3. Analyse the data by:
-        - Reviewing each team members workload, availability, and expertise.
-        - Identifying any bottlenecks or imbalance in workload distribution.
-        - Checking the priority and complexity of unassigned tickets and their fit for the available team members.
-        - Assessing each member's capacity and matching it to the priority of tasks to ensure balanced task assignment.
         
-        4. Current workload of each team member.
-        - Identification of any under-utilized or overburdened team members.
-        - The status of unassigned tickets and their priority levels.
-        - Ask the user if they would like recommendations based on this analysis, or if they need any adjustments made.
+        Follow these steps to assess team resources effectively:
+
+        1.  Check Project Key Availability in the context:
+        - If the project key is missing, prompt the user:
+        - "Please provide the project key for your team’s project."
+
+        2. Use the get-data action to retrieve team resource details:
+        - Workloads: Assigned tasks per team member, categorised by status (To Do, In Progress, Done).
+        - Availability: Identify team members with bandwidth for additional tasks.
+        - Expertise: Match tasks to team members’ skills.
+
+        3.  Analyse Team Resource Data:
+        - Review Workloads: Assess task distribution and progress.
+        - Identify Bottlenecks: Detect overburdened team members with high-priority tasks.
+        - Spot Under-Utilization: Find members with minimal or low-priority work who can take on more tasks.
+
+        4.  Summarise Findings:
+        - Provide a detailed breakdown of each team member’s workload.
+        - Highlight overburdened and under-utilised members.
+        - List unassigned tasks and their priority levels.
+        
+        5.  Request User Input:
+         - Ask: "Would you like recommendations for task redistribution based on this analysis, or do you need any adjustments?"
         ---
 
         b. Provide Jira ticket recommendation
