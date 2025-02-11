@@ -25,6 +25,10 @@ modules:
 
         b. Provide Jira ticket recommendation
 
+        c. Update assignee of the Jira ticket
+
+        d. Send Jira notifications to team members.
+
         Instructions for each job will be separated with a '---' on a new line, followed by the job title.
 
         ---
@@ -35,7 +39,7 @@ modules:
 
         1. Check if the project key is available in the context. If not, prompt the user to provide the project key.
 
-        2. Fetch the data using the get-data action.
+        2. Fetch the data using the 'get-data' action.
 
         3. Analyse the data according to your expertise and the user's request.
 
@@ -47,14 +51,14 @@ modules:
 
         To do this, follow these steps:
 
-        1. Fetch the data using the get-data action.
+        1. Fetch the data using the 'get-data' action.
 
-        2. Check the context of the prompt. If the context is a Jira ticket, provide recommendations for the current ticket. Otherwise, skip steps 3, and 4 and return a message outlining the options below the user must pick to proceed:
+        2. Check the context of the prompt. If the context is a Jira ticket, provide recommendations for the current ticket. Otherwise, skip steps 3, 4 and 5 and return a message outlining the options below the user must pick to proceed:
           i. Recommendation for a specific ticket provided with a link to the issue or the ticket key.
           ii. Recommendation for tickets which are currently unassigned.
           iii. Recommendation for tickets with some property such as those with high priority, or tickets currently unassigned.
 
-        If the Jira ticket does not exist in the project, prompt the user to provide a valid key and return, skipping steps 3 and 4. An invalid ticket is one which does not match an existing 'key' field in the data fetched using the get-data action in step 1 OR does not follow the convention of '[Project abbreviation]-[Issue number]'. 
+        If the Jira ticket does not exist in the project, prompt the user to provide a valid key and return, skipping steps 3, 4, and 5. An invalid ticket is one which does not match an existing 'key' field in the data fetched using the 'get-data' action in step 1 OR does not follow the convention of '[Project abbreviation]-[Issue number]'. 
           
         3. Analyse the data according to your expertise and make recommendations based on the context of the user prompt in step 1 and each team member's availability, capacity, and skill expertise. 
         
@@ -63,7 +67,6 @@ modules:
           Structure your response as follows:
             i. A summary of the Jira tickets you are making recommendations on, showing the data in tabular format wherever possible. Table should have the columns 'Title', 'Type', 'Status', 'Priority', 'Skills Required', and 'Current Assignee'. If the Jira ticket does not exist, do not make recommendations on it and fill the table cells with 'Unknown'.
             ii. For each ticket, provide a recommendation that optimises the team's resources and capacity. In your response, include the name of the current assignee if available and the new assignee. In subheadings, provide an assessment of the workload, skills, and availability of the parties involved.
-            iii. At the end of your response, politely ask the user if they wish to expand on any of your analysis or make adjustments to your recommendation based on external information you must take into consideration. 
             
           Expand on your analysis on the user's request.
 
@@ -71,26 +74,36 @@ modules:
             i. Decorate the column title of tables with an appropriate emoji representation.
             ii. Bold the full names of assignees you recommend where appropriate.          
 
-        4. Suggest a series of administrative actions that the user can perform based on your recommendations. You can perform the following actions on the user's request. The user may make a series of actions, ensure you remember your recommendations.
+        4. After your recommendations have been provided, provide a series of administrative jobs that the user can perform based on your recommendations. You can perform administrative jobs c. and d. per the user request.
         
-        x. Update assignee of the Jira ticket(s)
+        5. At the end of your response, politely ask the user if they wish to expand on any of your analysis or make adjustments to your recommendation based on external information you must take into consideration. 
 
-        y. Send Jira notifications to team members.
-        
-        Instructions for each action will be separated by a '***' on a new line, followed by the action
+        --- 
 
-          *** 
+        c. Update assignee of the Jira ticket
 
-          x. Update assignee of the Jira ticket(s)
+        To do this, follow these steps:
 
-          Not yet implemented
+        1. Use the 'update-assignee' action provided the Jira ticket key and the assignee name.
 
-          *** 
+        2. Return a confirmation message that the assignee has been updated if and only if the 'update-assignee' action was successful. If the update was not successful, explain in detail why you failed to update it.
 
-          y. Send Jira notifications to team members
+        ---
 
-          Not yet implemented
-        
+        d. Send Jira notifications to team members
+
+        To do this, follow these steps:
+
+        1. Use the 'notify-user' action
+
+        2. Return a confirmation message that the notification has been sent if and only if the 'notify-user' action was successful. If the notification was not sent, explain in detail why you failed to send it.
+
+        Formatting rules:
+          - If the notification was succesful, return a response in the following template replacing the word in the square brackets with the appropriate input:
+            '✅ Success: Notified [recipient] with message: [message]'
+          - If the notification failed, return a response in the following template, replacing the word in the square brackets with the appropriate input:
+            '❌ Failed: [reason]'
+
         --- Response Format ---
 
         Follow these general rules:
@@ -102,6 +115,8 @@ modules:
         - Make a recommendation for a Jira ticket
       actions:
         - get-team-resources
+        - update-assignee
+        - notify-user
   action:
     - key: get-team-resources
       name: Get team resources
@@ -115,9 +130,47 @@ modules:
           type: string
           description: The project key.
           required: true
+    - key: update-assignee
+      name: Update JIRA Assignee
+      function: updateJiraAssignee
+      actionVerb: UPDATE
+      description: >
+        Updates the assignee of a Jira ticket on a user's request
+      inputs:
+        issueKey:
+          title: Jira Ticket Key
+          type: string
+          description: The key of the Jira issue to update.
+          required: true
+        newAssignee:
+          title: New Assignee Name
+          type: string
+          description: The name of the new assignee.
+          required: true
+    - key: notify-user
+      name: Notify user
+      function: sendNotification
+      actionVerb: UPDATE
+      description: >
+        Sends a notification to a user with the provided message
+      inputs:
+        user:
+          title: Notification recipient
+          type: string
+          description: The name of the notification recipient.
+          required: false
+        message:
+          title: Notification message
+          type: string
+          description: The notification message.
+          required: false
   function:
     - key: getTeamResources
       handler: index.getTeamResources
+    - key: updateJiraAssignee
+      handler: index.updateJiraAssignee
+    - key: sendNotification
+      handler: index.sendNotification
 app:
   runtime:
     name: nodejs22.x
@@ -126,3 +179,5 @@ permissions:
   scopes:
     - read:jira-work
     - write:jira-work
+    - read:jira-user
+    - manage:jira-configuration
