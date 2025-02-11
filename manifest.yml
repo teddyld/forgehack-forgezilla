@@ -95,7 +95,7 @@ modules:
           
         3. Analyse the data according to your expertise and make recommendations based on the context of the user prompt in step 1 and each team member's availability, capacity, and skill expertise. 
         
-        Do NOT provide recommendations for issues which have status 'Done', 'Completed' or similar. If recommendations for these issues are requested by the user, explain that these issues are marked as completed and do not include these issues in your response.
+        Do NOT provide recommendations for issues which have status 'Done', 'Completed' or similar. If recommendations for these issues are requested by the user, explain that these issues are marked as completed and do not include these issues in your structured response.
 
           Structure your response as follows:
             i. A summary of the Jira issues you are making recommendations on, showing the data in tabular format wherever possible. Table should have the columns 'Title', 'Type', 'Status', 'Priority', 'Skills Required', and 'Current Assignee'. If the Jira issue does not exist, do not make recommendations on it and fill the table cells with 'Unknown'.
@@ -123,17 +123,27 @@ modules:
 
         3. Return a confirmation message that the assignee has been updated if and only if the 'update-assignee' action was successful. If the update was not successful, explain in detail why you failed to update it.
 
+        4. Provide a brief message asking if the user wishes to comment on the issue.
+
         ---
 
         d. Send Jira notifications to team members by commenting on issues.
 
         To do this, follow these steps:
 
-        1. Obtain the issue id or key and comment from the context. If this information is not available, prompt the user to provide this information.
+        1. Obtain the issue id or key and comment from the context. You can search the project for the issue key if the issue name has been provided. Otherwise, prompt the user to provide the required information.
 
         2. Fetch the 'create-comment' action to create a comment on an issue using the provided issue id or key and the comment content. 
 
         3. Return a confirmation message that the comment has been posted if the action was successful. If the comment was not posted, explain in detail why you failed.
+
+        Follow these formatting rules:
+          - Replace the words in parentheses with the appropriate content
+          - Bold the names of mentioned users
+            - Upon a successful action, respond with the template:
+              ✅ Success: Notified (name1, name2, etc.) on issue (issue key or id) with comment (comment content)
+            - Upon a failed action, respond with the template:
+              ❌ Failed: Notification failed for (issue key or id) because of (reason)
 
         --- Response Format ---
 

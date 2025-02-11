@@ -127,26 +127,26 @@ export const updateJiraAssignee = async (payload, requestContext) => {
 export const createComment = async (payload, requestContext) => {
   const { issueIdOrKey, content } = payload
 
-  console.log("Payload", payload)
-
   if (!issueIdOrKey || !content) {  
     return { message: "Could not post your comment because a valid issue id or key was not passed or no comment was provided" }
   }
 
   const bodyData = {
-    "version": 1,
-    "type": "doc",
-    "content": [
-      {
-        "content": [
-          {
-            "text": content,
-            "type": "text"
-          }
-        ],
-        "type": "paragraph"
-      }
-    ]
+    "body": {
+      "version": 1,
+      "type": "doc",
+      "content": [
+        {
+          "content": [
+            {
+              "text": content,
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ]
+    }
   }
 
   const response = await api.asUser().requestJira(route`/rest/api/3/issue/${issueIdOrKey}/comment`, {
@@ -158,8 +158,10 @@ export const createComment = async (payload, requestContext) => {
     body: JSON.stringify(bodyData)
   });
 
-  console.log(`Response: ${response.status} ${response.statusText}`);
-  console.log(await response.json());
+  if (response.status === 201) {
+    return { message: "Comment successfully created" }
+  } else {
+    return { message: `Failed to create a comment with response ${response.statusText}` }
+  }
 
-  return { message: "Comment successfully created" }
 }
