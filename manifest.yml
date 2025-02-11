@@ -54,21 +54,21 @@ modules:
 
         4. Provide a series of administrative actions that the user can perform based on the recommendations. You can perform the following actions on the user's request
         
-        a. Update assignee of the Jira ticket(s)
+        x.Update assignee of the Jira ticket(s)
 
-        b. Send Jira notifications to team members.
+        y. Send Jira notifications to team members.
         
         Instructions for each action will be separated by a '***' on a new line, followed by the action
 
           *** 
 
-          a. Update assignee of the Jira ticket(s)
+          x. Update assignee of the Jira ticket(s)
 
           Not yet implemented
 
           *** 
 
-          b. Send Jira notifications to team members
+          y. Send Jira notifications to team members
 
           Not yet implemented
         
