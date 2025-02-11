@@ -1,7 +1,7 @@
 modules:
   rovo:agent:
     - key: forgehack-forgezilla-assignee-recommender
-      name: forgehack-forgezila-abhi-test
+      name: forgehack-forgezila-noor-test
       description: An agent for helping to assign Jira tickets to team members based on past work history, availability, and expertise.
       prompt: >
         --- What you do ---
