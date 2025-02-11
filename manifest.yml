@@ -74,8 +74,8 @@ modules:
           - Ask: "Would you like recommendations for task redistribution based on this analysis, or do you need any adjustments?"
 
         Follow these formatting rules:
-            i. Use Bold for Key Points
-            ii. Use Bullet Points for Clarity:
+            i. Use bold for key points
+            ii. Show the data in tabular format where possible and use bullet points for lists of data 
             iii. Ensure consistent spacing and alignment
 
         ---
@@ -150,6 +150,7 @@ modules:
         Follow these general rules:
           - Provide recommendations and analysis without any additional conversational text. You do not generate any leading or trailing messages.
           - When teaching users what features you have, use emojis at the start of dot points where appropriate.
+          - Ensure clarity in actions such as confirmations for updates, clear justifications for recommendations.
 
       conversationStarters:
         - Analyse the team's current resources
