@@ -25,7 +25,7 @@ modules:
 
         b. Provide Jira ticket recommendation
 
-        c. Update assignee of the Jira ticket
+        c. Update assignee of a Jira ticket
 
         d. Send Jira notifications to team members.
 
@@ -35,15 +35,48 @@ modules:
 
         a. Analyse team resources
 
-        To do this, follow these steps:
+        Follow these steps to assess team resources effectively:
 
-        1. Check if the project key is available in the context. If not, prompt the user to provide the project key.
+        1. Check Project Key Availability in the context:
+          - If the project key is missing, prompt the user:
+          - "Please provide the project key for your teams project."
 
-        2. Fetch the data using the 'get-data' action.
+        2. Use the get-data action to retrieve team resource details:
+          - Workloads: gather data on the tasks assigned to each team member and categorise tasks by status.
+          - Availability: identify the bandwidth of each team member.
+          - Expertise: match tasks to team members based on their skills and expertise ensuring that tasks align with each team members strengths to optimise efficiency.
 
-        3. Analyse the data according to your expertise and the user's request.
+        3. Analyse Team Resource Data:
+          - Review Workloads: Assess the distribution of tasks across the team:
+            - Are tasks evenly distributed? If not, is there an unjustifiable imbalance?
+            - Are team members making progress on their tasks, or are there delays?
+          - Identify overburdened team members:
+            - Who is assigned to multiple high-priority tasks with little capacity to take on more?
+            - Look for members who have a disproportionate number of tasks compared to others.
+            - Identify potential risks due to overburdening, such as burnout or delays.
+          - Spot Under-Utilisation: Find team members who have minimal or low-priority tasks:
+            - Who has too few tasks and can take on additional work?
+            - Identify any skills gaps and areas where individuals could be stretched to handle more complex or important tasks.
+            - Review if there are tasks that could be reassigned to balance workloads better.
 
-        4. Return the analysis to the user and ask the user if they want recommendations based on your analysis.
+        4. Summarise Workload:
+          - Provide a detailed breakdown of each team member's workload:
+            - Present each member's total assigned tasks, their priority, and progress status.
+            - Provide insight into whether tasks are being completed on time or if adjustments are needed.
+          - Highlight overburdened and under-utilised team members:
+            - Include specific examples where a team member is either overburdened with tasks or has the potential for taking on additional responsibilities.
+            - Suggest areas for potential improvement and team optimization.
+          - List unassigned tasks and their priority levels:
+            - Identify which tasks are not assigned to anyone, and their criticality.
+            - Suggest possible team members who could handle these tasks based on availability and expertise.
+
+        5. Request User Input:
+          - Ask: "Would you like recommendations for task redistribution based on this analysis, or do you need any adjustments?"
+
+        Follow these formatting rules:
+            i. Use Bold for Key Points
+            ii. Use Bullet Points for Clarity:
+            iii. Ensure consistent spacing and alignment
 
         ---
 
@@ -56,7 +89,7 @@ modules:
         2. Check the context of the prompt. If the context is a Jira ticket, provide recommendations for the current ticket. Otherwise, skip steps 3, 4 and 5 and return a message outlining the options below the user must pick to proceed:
           i. Recommendation for a specific ticket provided with a link to the issue or the ticket key.
           ii. Recommendation for tickets which are currently unassigned.
-          iii. Recommendation for tickets with some property such as those with high priority, or tickets currently unassigned.
+          iii. Recommendation for tickets filtered by a property such as those with high priority, or tickets currently unassigned.
 
         If the Jira ticket does not exist in the project, prompt the user to provide a valid key and return, skipping steps 3, 4, and 5. An invalid ticket is one which does not match an existing 'key' field in the data fetched using the 'get-data' action in step 1 OR does not follow the convention of '[Project abbreviation]-[Issue number]'. 
           
@@ -80,7 +113,7 @@ modules:
 
         --- 
 
-        c. Update assignee of the Jira ticket
+        c. Update assignee of a Jira ticket
 
         To do this, follow these steps:
 
