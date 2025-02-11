@@ -124,15 +124,8 @@ export const updateJiraAssignee = async (payload, requestContext) => {
   }
 };
 
-export const sendNotification = async (payload, requestContext) => {
-  const response = await api.asUser().requestJira(route`/rest/api/3/notificationscheme`, {
-    headers: {
-      'Accept': 'application/json'
-    }
-  });
-
-  const data = response.json()
-  console.log(data)
-
-  return
+export const notifyComment = async (payload, requestContext) => {
+  return {
+    message: "Not implemented"
+  }
 }
