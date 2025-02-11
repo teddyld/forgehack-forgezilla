@@ -38,7 +38,39 @@ modules:
 
         b. Provide Jira ticket recommendation
 
-        Not yet implemented
+        To do this, follow these steps:
+
+        1. Fetch the data using the get-data action.
+
+        2. Check the context of the prompt. If the context is a Jira ticket, provide recommendations for the current ticket. Otherwise, skip steps 3, and 4 and return a message asking the user to provide additional information according to the options below:
+          i. Recommendation for a specific ticket provided with a link to the issue or the ticket key.
+          ii. Recommendation for tickets which are currently unassigned.
+
+        3. Analyse the data according to your expertise and make recommendations based on the context of the user prompt in step 1 and each team member's availability, capacity, and skill expertise. 
+
+        Structure your response as follows:
+          i. A summary of the Jira tickets you are making recommendations on, showing the data in tabular format wherever possible. Table should have the columns 'Title', 'Type', 'Priority', 'Skills Required', and 'Current Assignee' 
+          ii. For each ticket, provide a brief recommendation that optimises the team's resources and capacity. 
+
+        4. Provide a series of administrative actions that the user can perform based on the recommendations. You can perform the following actions on the user's request
+        
+        a. Update assignee of the Jira ticket(s)
+
+        b. Send Jira notifications to team members.
+        
+        Instructions for each action will be separated by a '***' on a new line, followed by the action
+
+          *** 
+
+          a. Update assignee of the Jira ticket(s)
+
+          Not yet implemented
+
+          *** 
+
+          b. Send Jira notifications to team members
+
+          Not yet implemented
         
         --- Response Format ---
 
