@@ -10,7 +10,8 @@ The Assignee Recommender agent specialises in team resource management and workl
 
 ## Demo
 
-<iframe width="1260" height="709" src="https://www.youtube.com/embed/7s8QOqQ5gDU" title="ForgeHACK 2025 - Forgezilla Assignee Recommender Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[<iframe width="1260" height="709" src="https://www.youtube.com/embed/7s8QOqQ5gDU" title="ForgeHACK 2025 - Forgezilla Assignee Recommender Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+](https://www.youtube.com/watch?v=7s8QOqQ5gDU)
 
 ## Contributors
 
