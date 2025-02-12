@@ -1,4 +1,4 @@
-# Assignee Recommender
+# Assignee Recommender Agent
 
 > A Rovo Agent that assigns Jira issues to team members based on past work history, availability, expertise and more with recommendations.
 
